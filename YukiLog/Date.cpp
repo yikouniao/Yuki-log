@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "date.h"
+#include <string>
+#include <fstream>
 
 Date::Date(int year, int month, int day) : year_(year), month_(month), day_(day) {
 	if (!DateCheck()) {
@@ -51,7 +53,30 @@ ostream & operator<<(ostream &out, const Date &date) {
 	return out;
 }
 
-Date & Date::operator++() {
+void DateIfstream(fstream& p_file, Date& date) {
+	string date_str;
+	getline(p_file, date_str);
+	int date_length = date_str.length();
+	int dot1 = 0, dot2 = 0;			//存放点所在的位置
+	for (int i = 0; i < date_length; i++) {
+		if (date_str[i] == '.') {
+			(dot1 == 0) ? (dot1 = i) : (dot2 = i);
+		}
+	}
+	string date_year, date_month, date_day;
+	date_year.assign(date_str, dot1);
+	date_month.assign(date_str, dot1 + 2, dot2 - dot1 - 1);
+	date_day.assign(date_str, dot2 + 2, date_length);
+	date.year_ = stoi(date_year);
+	date.month_ = stoi(date_month);
+	date.day_ = stoi(date_day);
+}
+
+void DateOfstream(fstream& p_file, const Date& date) {
+	p_file << date.year_ << '.' << date.month_ << '.' << date.day_;
+}
+
+Date& Date::operator++() {
 	++day_;
 	return *this;
 }

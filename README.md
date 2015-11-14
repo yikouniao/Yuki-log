@@ -8,7 +8,7 @@
 
 理论上来说，VoiceActress类里面的成员有很多个Character变量，应该把每个VoiceActress的所有Character存为链表，方便文件读写也方便增删节点。
 
-但是我的本意是尝试两个类同时由同一个基类派生而来，进而可以使用虚函数什么的……
+但是我的本意是尝试两个并列的类同时由同一个基类派生而来，进而可以使用虚函数（读取moe_rate）或者模板（构建链表）什么的……
 
 所以还是把每个VoiceActress的所有Characters带上中间点逗号空格一并存为一个std::string算了
 

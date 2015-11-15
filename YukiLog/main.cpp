@@ -2,35 +2,39 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <list>
+#include "date.h"
+#include "person.h"
+#include "voice-actress.h"
+#include "character.h"
 
-//#include "constants.h"
-//#include "date.h"
+using namespace std;
+
+#define TEST_LIST 0
+#if TEST_LIST
+void TestList(list<Date>& li) {
+	li.push_back(Date(2003, 7, 6));
+	li.push_back({ 2004, 7, 6 });
+}
+#endif
 
 int main()
 {
-	using namespace std;
-#if 0
-	Date date1;
-	Date date2(2000, 1, 1);
-	cout << date1 << '\t' << date2 << '\n';
-	cin >> date1;
-	int year, month, day;
-	cin >> year >> month >> day;
-	date2.SetDate(year, month, day);
-	cout << date1 << '\t' << date2 << '\n';
-#endif
-
-#if 0
-	ofstream outf("Sample.dat");
-	// If we couldn't open the output file stream for writing
-	if (!outf)
-	{
-		// Print an error and exit
-		cerr << "Uh oh, Sample.dat could not be opened for writing!" << endl;
-		std::cin.get();
-		exit(1);
+#if TEST_LIST
+	list<Date> li;
+	TestList(li);
+	//li.push_back(3);
+	list<Date>::const_iterator it;
+	it = li.begin();
+	while (it != li.end()) {
+		cout << *it << '\n';
+		++it;
 	}
 #endif
+
+	list<VoiceActress> voice_actress_list;
+	CreatPersonList(voice_actress_list, "dat\\voice-actress.dat");
+	SavePeosonList(voice_actress_list, "dat\\voice-actress.dat");
 
 
 

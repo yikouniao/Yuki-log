@@ -4,36 +4,13 @@
 #include <fstream>
 
 Date::Date(int year, int month, int day) : year_(year), month_(month), day_(day) {
-	if (!DateCheck()) {
-		cerr << "This date is illegal.\n";
-	}
+	DateCheck();
 }
 
-bool Date::SetDate(int year, int month, int day) {
+void Date::SetDate(int year, int month, int day) {
 	Date date(year, month, day);
-	if (!date.DateCheck()) {
-		cerr << "This date is illegal.\n"; 
-		return false;
-	}
-	else {
-		(*this) = date;
-		return true;
-	}
-}
-
-ostream & operator<<(ostream &out, const Date &date) {
-	if (date.year_ < 0) {							//BC
-		cout << "BC" << -date.year_;
-	}
-	else {														//DC
-		cout << date.year_;
-	}
-	cout << "." << date.month_ << "." << date.day_;
-	return out;
-}
-
-void DateOfstream(ofstream& p_file, const Date& date) {
-	p_file << date.year_ << '.' << date.month_ << '.' << date.day_;
+	date.DateCheck();
+	(*this) = date;
 }
 
 Date& Date::operator++() {
@@ -58,9 +35,9 @@ Date Date::operator--(int) {
 	return temp;
 }
 
-bool Date::DateCheck() {
+void Date::DateCheck() const {
 	if (year_ == 0 || month_ < 1 || month_ > 12) {
-		return false;
+		throw "Wrong Date!\n";
 	}
 	else {
 		switch (month_) {
@@ -72,44 +49,44 @@ bool Date::DateCheck() {
 		case 10:
 		case 12: 
 			if (day_ < 1 || day_ > 31) {
-				return false;
+				throw "Wrong Date!\n";
 			}
 			else {
-				return true;
+				return;
 			}
 		case 4:
 		case 6:
 		case 9:
 		case 11:
 			if (day_ < 1 || day_ > 30) {
-				return false;
+				throw "Wrong Date!\n";
 			}
 			else {
-				return true;
+				return;
 			}
 		case 2:
 			if (IsLeapYear()) {
 				if (day_ < 1 || day_ > 29) {
-					return false;
+					throw "Wrong Date!\n";
 				}
 				else {
-					return true;
+					return;
 				}
 			}
 			else {  // not a leap year
 				if (day_ < 1 || day_ > 28) {
-					return false;
+					throw "Wrong Date!\n";
 				}
 				else {
-					return true;
+					return;
 				}
 			}
-		default: return false;
+		default: throw "Wrong Date!\n";
 		}
 	}
 }
 
-bool Date::IsLeapYear() {
+bool Date::IsLeapYear() const {
 	int year_temp;
 	if (year_ < 0) {					//BC
 		year_temp = year_ + 1;

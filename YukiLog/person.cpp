@@ -12,11 +12,11 @@ void Person::SetBirthday(const Date &birthday) {
 	birthday_ = birthday;
 }
 
-string& Person::GetName() {
+const string& Person::GetName() const{
 	return name_;
 }
 
-Date& Person::GetBirthday() {
+const Date& Person::GetBirthday() const{
 	return birthday_;
 }
 

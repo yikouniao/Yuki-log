@@ -12,23 +12,25 @@ private:
 
 public:
 	Date(int year = 2003, int month = 7, int day = 6);
-	bool SetDate(int year, int month, int day);
-	template <typename TypeStrem>
-	friend TypeStrem & operator>>(TypeStrem &in, Date &date);
-	friend ostream & operator<<(ostream &out, const Date &date);
-	friend void DateOfstream(ofstream& p_file, const Date& date);
+	void SetDate(int year, int month, int day);
+
+	template <typename TypeStream>
+	friend TypeStream& operator>>(TypeStream& in, Date& date);
+	template <typename TypeStream>
+	friend TypeStream& operator<<(TypeStream& out, const Date& date);
+
 	Date & operator++();
 	Date operator++(int);
 	Date & operator--();
 	Date operator--(int);
-	bool DateCheck();
-	bool IsLeapYear();
+	void DateCheck() const;
+	bool IsLeapYear() const;
 };
 
-template <typename TypeStrem>
-TypeStrem & operator>>(TypeStrem &in, Date &date) {
+template <typename TypeStream>
+TypeStream & operator>>(TypeStream &in, Date &date) {
 	// Input ****.**.**
-	cout << "Getting a date in type of ****(BC).**.**...\n";
+	cout << "Getting a date in type of ****(BC).**.** ...\n";
 	string date_str;
 	getline(in, date_str);
 	int date_length = date_str.length();
@@ -49,8 +51,20 @@ TypeStrem & operator>>(TypeStrem &in, Date &date) {
 		date.year_ = -date.year_;
 	}
 
-	if (!date.DateCheck()) {
-		throw "This date is illegal! Pleast retry.\n";
-	}
+	date.DateCheck();
+	
 	return in;
+}
+
+template <typename TypeStream>
+TypeStream & operator<<(TypeStream &out, const Date& date) {
+	date.DateCheck();
+	if (date.year_ < 0) {							//BC
+		out << -date.year_ << "BC";
+	}
+	else {														//AD
+		out << date.year_;
+	}
+	out << "." << date.month_ << "." << date.day_;
+	return out;
 }

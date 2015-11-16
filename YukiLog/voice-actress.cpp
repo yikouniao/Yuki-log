@@ -11,7 +11,7 @@ void VoiceActress::ReadAPersonFromFile(ifstream& voice_actress_file) {
 	getline(voice_actress_file, name);
 	SetName(name);
 	Date date;
-	DateIfstream(voice_actress_file, date);
+	//DateIfstream(voice_actress_file, date);
 	SetBirthday(date);
 
 	string moe_rate;

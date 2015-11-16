@@ -10,33 +10,25 @@
 
 using namespace std;
 
-#define TEST_LIST 0
-#if TEST_LIST
-void TestList(list<Date>& li) {
-	li.push_back(Date(2003, 7, 6));
-	li.push_back({ 2004, 7, 6 });
-}
-#endif
-
 int main()
 {
-#if TEST_LIST
-	list<Date> li;
-	TestList(li);
-	//li.push_back(3);
-	list<Date>::const_iterator it;
-	it = li.begin();
-	while (it != li.end()) {
-		cout << *it << '\n';
-		++it;
+	//list<VoiceActress> voice_actress_list;
+	//CreatPersonList(voice_actress_list, "dat\\voice-actress.dat");
+	//SavePeosonList(voice_actress_list, "dat\\voice-actress.dat");
+
+#if 0
+	//ifstream inf("z.txt");
+	Date temp1;
+	try {
+		cin >> temp1;
+	}
+	catch (char* strException) {
+		cerr << strException;
+	}
+	catch (...) {
+		cerr << "This date is illegal!Pleast retry.\n";
 	}
 #endif
-
-	list<VoiceActress> voice_actress_list;
-	CreatPersonList(voice_actress_list, "dat\\voice-actress.dat");
-	SavePeosonList(voice_actress_list, "dat\\voice-actress.dat");
-
-
 
 	std::cin.clear(); // reset any error flags
 	std::cin.ignore(32767, '\n'); // ignore any characters in the input buffer until we find an enter character

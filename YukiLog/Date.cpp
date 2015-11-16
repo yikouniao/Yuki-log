@@ -21,27 +21,6 @@ bool Date::SetDate(int year, int month, int day) {
 	}
 }
 
-istream & operator>>(istream &in, Date &date) {
-	// Input ****.**.**
-	cout << "Input a date in type of ****.**.**\n";
-	bool date_err = true;				// Assume the date is in error by default
-	while (date_err) {
-		cin >> date.year_;
-		cin.ignore(32767, '.');
-		cin >> date.month_;
-		cin.ignore(32767, '.');
-		cin >> date.day_;
-
-		if (!date.DateCheck()) {
-			cerr << "This date is illegal! Pleast retry.\n";
-		}
-		else {
-			date_err = false;
-		}
-	}
-	return in;
-}
-
 ostream & operator<<(ostream &out, const Date &date) {
 	if (date.year_ < 0) {							//BC
 		cout << "BC" << -date.year_;
@@ -51,25 +30,6 @@ ostream & operator<<(ostream &out, const Date &date) {
 	}
 	cout << "." << date.month_ << "." << date.day_;
 	return out;
-}
-
-void DateIfstream(ifstream& p_file, Date& date) {
-	string date_str;
-	getline(p_file, date_str);
-	int date_length = date_str.length();
-	int dot1 = 0, dot2 = 0;			//存放点所在的位置
-	for (int i = 0; i < date_length; i++) {
-		if (date_str[i] == '.') {
-			(dot1 == 0) ? (dot1 = i) : (dot2 = i);
-		}
-	}
-	string date_year, date_month, date_day;
-	date_year.assign(date_str, 0, dot1);
-	date_month.assign(date_str, dot1 + 1, dot2 - dot1 - 1);
-	date_day.assign(date_str, dot2 + 1, date_length - dot2 - 1);
-	date.year_ = stoi(date_year);
-	date.month_ = stoi(date_month);
-	date.day_ = stoi(date_day);
 }
 
 void DateOfstream(ofstream& p_file, const Date& date) {

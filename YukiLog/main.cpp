@@ -13,8 +13,8 @@ using namespace std;
 int main()
 {
 	list<VoiceActress> voice_actress_list;
-	CreatPersonList(voice_actress_list, "dat\\voice-actress.dat");
-	SavePeosonList(voice_actress_list, "dat\\voice-actress.dat");
+	CreatPersonList(voice_actress_list, "dat/voice-actress.dat");
+	SavePeosonList(voice_actress_list, "dat/voice-actress.dat");
 
 
 

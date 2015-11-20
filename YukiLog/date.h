@@ -14,10 +14,10 @@ public:
 	Date(int year = 2003, int month = 7, int day = 6);
 	void SetDate(int year, int month, int day);
 
-	template <typename TypeStream>
-	friend TypeStream& operator>>(TypeStream& in, Date& date);
-	template <typename TypeStream>
-	friend TypeStream& operator<<(TypeStream& out, const Date& date);
+	template <typename StreamType>
+	friend StreamType& operator>>(StreamType& in, Date& date);
+	template <typename StreamType>
+	friend StreamType& operator<<(StreamType& out, const Date& date);
 
 	Date & operator++();
 	Date operator++(int);
@@ -27,8 +27,8 @@ public:
 	bool IsLeapYear() const;
 };
 
-template <typename TypeStream>
-TypeStream & operator>>(TypeStream &in, Date &date) {
+template <typename StreamType>
+StreamType & operator>>(StreamType &in, Date &date) {
 	// Input ****.**.**
 	cout << "Getting a date in type of ****(BC).**.** ...\n";
 	string date_str;
@@ -56,8 +56,8 @@ TypeStream & operator>>(TypeStream &in, Date &date) {
 	return in;
 }
 
-template <typename TypeStream>
-TypeStream & operator<<(TypeStream &out, const Date& date) {
+template <typename StreamType>
+StreamType & operator<<(StreamType &out, const Date& date) {
 	date.DateCheck();
 	if (date.year_ < 0) {							//BC
 		out << -date.year_ << "BC";

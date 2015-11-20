@@ -23,27 +23,31 @@ void CreatPersonList(list<PersonType>& person_list, const string& file) {
 	ifstream person_file(file);
 	if (!person_file)
 	{
-		cerr << "The file of persons could not be opened!\n" << endl;
+		cerr << file << " could not be opened!\n" << endl;
 		cin.get();
 		exit(1);
 	}
 
 	PersonType new_person;
-	while (!person_file.eof()) {
+	while (person_file.peek() != EOF) {
 		try {
 			person_file >> new_person;
 		}
 		catch (...) {
-			cerr << "Error while inputting a person! It has been replaced with a default person.\n";
-			PersonType default_person;
-			new_person = default_person;
+			cerr << "Error while inputting the following person!\n";
+			cout << new_person;
+			cerr << "\n";
+			continue;
 		}
 		if (person_file.bad() || person_file.fail()) {
-			cerr << "Error while reading voice-actress.dat\n";
+			cerr << "Error while reading " << file << " \n";
 			cin.get();
 			exit(1);
 		}
 		person_list.push_back(new_person);
+	}
+	if (!person_file.eof()) {
+		cerr << "Error while reading " << file << " \n";
 	}
 }
 
@@ -52,7 +56,7 @@ void SavePeosonList(list<PersonType>& person_list, const string& file) {
 	ofstream person_file(file);
 	if (!person_file)
 	{
-		cerr << "The file of persons could not be opened!\n" << endl;
+		cerr << file << " could not be opened!\n" << endl;
 		cin.get();
 		exit(1);
 	}
@@ -62,21 +66,32 @@ void SavePeosonList(list<PersonType>& person_list, const string& file) {
 	while (it != person_list.end()) {
 		try {
 			person_file << *it;
-			if (++it != person_list.end()) {
-				person_file << "\n";
-			}
-			--it;
 		}
 		catch (...) {
-			cerr << "Error while ouputting a person! It has been replaced with a default person.\n";
+			cerr << "Error while ouputting a person!\n";
 			cin.get();
 			exit(1);
 		}
 		if (person_file.bad() || person_file.fail()) {
-			cerr << "Error while reading voice-actress.dat\n";
+			cerr << "Error while reading " << file << " \n";
 			cin.get();
 			exit(1);
 		}
 		++it;
 	}
+}
+
+//	PersonType can be VoiceActress, Character
+//  StreamType can be istream, ifstream
+template <typename PersonType, typename StreamType>
+void AddPersonToList(list<PersonType>& person_list, StreamType& in) {
+	PersonType new_person;
+	try {
+		in >> new_person;
+	}
+	catch (...) {
+		cerr << "Error while inputting a person!\n";
+		return;
+	}
+	person_list.push_back(new_person);
 }

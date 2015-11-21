@@ -3,6 +3,7 @@
 #include <string>
 #include "date.h"
 #include <list>
+#include <functional>
 
 using namespace std;
 
@@ -94,4 +95,24 @@ void AddPersonToList(list<PersonType>& person_list, StreamType& in) {
     return;
   }
   person_list.push_back(new_person);
+}
+
+enum SortDir {
+  DESC, ASC
+};
+
+template <typename PersonType>
+void SortPersonList(list<PersonType>& person_list, SortDir dir = DESC) {
+  if (dir == DESC) {
+    person_list.sort(greater<PersonType>());
+  } else {
+    person_list.sort(less<PersonType>());
+  }
+}
+
+// Delete duplicate nodes after sort.
+template <typename PersonType>
+void UniquePersonList(list<PersonType>& person_list, SortDir dir = DESC) {
+  SortPersonList(person_list, dir);
+  person_list.unique();
 }

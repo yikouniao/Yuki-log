@@ -17,6 +17,8 @@ class VoiceActress : public Person {
   template <typename StreamType>
   friend StreamType& operator<<(StreamType& out, const VoiceActress& voice_actress);
   friend bool operator==(const VoiceActress& voice_actress1, const VoiceActress& voice_actress2);
+  friend bool operator<(const VoiceActress& voice_actress1, const VoiceActress& voice_actress2);
+  friend bool operator>(const VoiceActress& voice_actress1, const VoiceActress& voice_actress2);
 };
 
 // throws an exception if an internal error occurred.

@@ -15,7 +15,7 @@ int main()
   list<VoiceActress> voice_actress_list;
   CreatPersonList(voice_actress_list, "dat/voice-actress.dat");
   SavePeosonList(voice_actress_list, "dat/voice-actress.dat");
-  voice_actress_list.unique();
+  UniquePersonList(voice_actress_list);
   SavePeosonList(voice_actress_list, "dat/voice-actress.dat");
   
   cout << "\nProgram runs normally to the end!\n";
@@ -25,4 +25,3 @@ int main()
 
   return 0;
 }
-

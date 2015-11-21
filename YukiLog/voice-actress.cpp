@@ -23,3 +23,22 @@ bool operator==(const VoiceActress& voice_actress1, const VoiceActress& voice_ac
     return false;
   }
 }
+
+// When their moe-rates are equal, compare names.
+bool operator<(const VoiceActress& voice_actress1, const VoiceActress& voice_actress2) {
+  if (voice_actress1.moe_rate_ != voice_actress2.moe_rate_) {
+    return voice_actress1.moe_rate_ < voice_actress2.moe_rate_;
+  } else {
+    return voice_actress1.GetName() < voice_actress2.GetName();
+  }
+}
+
+// When their moe-rates are equal, compare names.
+bool operator>(const VoiceActress& voice_actress1, const VoiceActress& voice_actress2) {
+  if (voice_actress1.moe_rate_ != voice_actress2.moe_rate_) {
+    return voice_actress1.moe_rate_ > voice_actress2.moe_rate_;
+  }
+  else {
+    return voice_actress1.GetName() > voice_actress2.GetName();
+  }
+}

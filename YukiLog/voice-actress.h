@@ -19,6 +19,7 @@ class VoiceActress : public Person {
   friend bool operator==(const VoiceActress& voice_actress1, const VoiceActress& voice_actress2);
   friend bool operator<(const VoiceActress& voice_actress1, const VoiceActress& voice_actress2);
   friend bool operator>(const VoiceActress& voice_actress1, const VoiceActress& voice_actress2);
+  void Modify();
 };
 
 // throws an exception if an internal error occurred.
@@ -45,10 +46,10 @@ StreamType& operator>>(StreamType& in, VoiceActress& voice_actress) {
 // throws an exception if an internal error occurred.
 template <typename StreamType>
 StreamType& operator<<(StreamType& out, const VoiceActress& voice_actress) {
-  out << voice_actress.GetName() << '\n'
-      << voice_actress.GetBirthday() << '\n'
-      << voice_actress.moe_rate_ << '\n'
-      << voice_actress.enterprise_ << '\n'
-      << voice_actress.characers_ << '\n';
+  out << voice_actress.GetName() << '\n' <<
+         voice_actress.GetBirthday() << '\n' <<
+         voice_actress.moe_rate_ << '\n' <<
+         voice_actress.enterprise_ << '\n' <<
+         voice_actress.characers_ << '\n';
   return out;
 }

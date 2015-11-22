@@ -19,7 +19,8 @@ class Person {
   const Date& Person::GetBirthday() const;
 };
 
-template <typename PersonType>      // PersonType可以是VoiceActress、Character
+// The following PersonTypes can be VoiceActress, Character, etc.
+template <typename PersonType>
 void CreatPersonList(list<PersonType>& person_list, const string& file) {
   ifstream person_file(file);
   if (!person_file)
@@ -52,8 +53,19 @@ void CreatPersonList(list<PersonType>& person_list, const string& file) {
   }
 }
 
-template <typename PersonType>      // PersonType可以是VoiceActress、Character
-void SavePeosonList(list<PersonType>& person_list, const string& file) {
+template <typename PersonType>
+void PrintPersonList(const list<PersonType>& person_list) {
+  cout << "\nPrint persons:\n";
+  int i = 1;
+  for (const auto& person : person_list) {
+    cout << "\nNumber " << i << ":\n" << person;
+    ++i;
+  }
+  cout << "\n";
+}
+
+template <typename PersonType>
+void SavePeosonList(const list<PersonType>& person_list, const string& file) {
   ofstream person_file(file);
   if (!person_file)
   {
@@ -110,9 +122,80 @@ void SortPersonList(list<PersonType>& person_list, SortDir dir = DESC) {
   }
 }
 
-// Delete duplicate nodes after sort.
+// Sort before using unique() to delete uncontinuous duplicate nodes.
 template <typename PersonType>
 void UniquePersonList(list<PersonType>& person_list, SortDir dir = DESC) {
   SortPersonList(person_list, dir);
   person_list.unique();
+}
+
+template <typename PersonType>
+bool FindPerson(const list<PersonType>& person_list,
+                typename list<PersonType>::const_iterator& it,
+                const string& name) {
+  for (it = person_list.begin(); it != person_list.end(); ++it) {
+    if (it->GetName() == name) {
+      cout << '\n' << name << " was found!:\n" << *it << "\n";
+      return true;
+    }
+  }
+  cout << "\nCould not find " << name << ". \n\n";
+  return false;
+}
+
+template <typename PersonType>
+bool FindPerson(const list<PersonType>& person_list,
+                typename list<PersonType>::const_iterator& it, int order) {
+  if (static_cast<int>(person_list.size()) < order) {
+    cout << "\nWe have only " << person_list.size() << " persons.\n\n";
+    return false;
+  } else if (order < 1) {
+    cout << "\nInput an interger order.\n" <<
+            "You can print the whole list to check the order.\n\n";
+    return false;
+  } else {
+    int i = order;
+    for (it = person_list.begin(); i > 1; ++it, --i) {}
+    cout << "\nNumber "<< order << " person was found!:\n" << *it << "\n";
+    return true;
+  }
+}
+
+template <typename PersonType>
+void DeletePerson(list<PersonType>& person_list,
+                  typename list<PersonType>::iterator& it) {
+  string name = it->GetName();
+  person_list.erase(it);
+  cout << name << " was deleted!\n\n";
+}
+
+template <typename PersonType>
+void DeletePerson(list<PersonType>& person_list, const string& name) {
+  list<PersonType>::iterator it = person_list.begin();
+  for (; it != person_list.end(); ++it) {
+    if (it->GetName() == name) {
+      person_list.erase(it);
+      cout << name << " was deleted!\n\n";
+      return;
+    }
+  }
+  cout << "Could not find " << name << ". \n\n";
+}
+
+template <typename PersonType>
+void DeletePerson(list<PersonType>& person_list, int order) {
+  list<PersonType>::iterator it = person_list.begin();
+  if (static_cast<int>(person_list.size()) < order) {
+    cout << "We have only " << person_list.size() << " persons.\n\n";
+  }
+  else if (order < 1) {
+    cout << "Input an interger order.\n" <<
+      "You can print the whole list to check the order.\n\n";
+  }
+  else {
+    int i = order;
+    for (it = person_list.begin(); i > 1; ++it, --i) {}
+    person_list.erase(it);
+    cout << "Number " << order << " person was deleted!\n\n";
+  }
 }

@@ -23,8 +23,8 @@ class Character : public Person {
 template <typename StreamType>
 StreamType& operator>>(StreamType& in, Character& character) {
   string name;
-  cout << "Getting name...\n";
-  getline(in, name);
+  cout << "\nGetting name...\n";
+  std::getline(in, name);
   character.SetName(name);
   Date date;
   in >> date;
@@ -41,9 +41,9 @@ StreamType& operator>>(StreamType& in, Character& character) {
 // throws an exception if an internal error occurred.
 template <typename StreamType>
 StreamType& operator<<(StreamType& out, const Character& character) {
-  out << character.GetName() << '\n' <<
-    character.GetBirthday() << '\n' <<
-    character.moe_rate_ << '\n' <<
-    character.anime_ << '\n';
+  out << "\n" << character.GetName() << '\n' <<
+         character.GetBirthday() << '\n' <<
+         character.moe_rate_ << '\n' <<
+         character.anime_ << '\n';
   return out;
 }

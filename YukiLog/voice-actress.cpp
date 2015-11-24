@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "voice-actress.h"
+#include <conio.h>
+#include "key.h"
 
 VoiceActress::VoiceActress() : Person(), moe_rate_(0.0), enterprise_("NULL"), characers_("NULL") {}
 
@@ -49,14 +51,10 @@ void VoiceActress::Modify() {
           "\'D\' or \'d\' for birthday\n" <<
           "\'M\' or \'m\' for moe-rate\n" <<
           "\'E\' or \'e\' for enterprise\n" <<
-          "\'C\' or \'c\' for characters\n";
-  if (!cin.good()) {
-    cin.clear();  // reset any error flags
-    cin.ignore(32767, '\n');
-  }
-  char cmd;
-  cin >> cmd;
-  cin.ignore(32767, '\n');
+          "\'C\' or \'c\' for characters\n" <<
+          "Esc for cancellation.\n";
+  while (!_kbhit()) {}
+  char cmd = _getch();
   switch (cmd) {
     case 'N':
     case 'n': {
@@ -91,11 +89,11 @@ void VoiceActress::Modify() {
       break;
     case 'C':
     case 'c': {
-      cout << "\'A\' or \'a\' for appending a new character\n" <<
+      cout << "\n\'A\' or \'a\' for appending a new character\n" <<
         "other keys for replacing the old character infomation\n";
-      cin >> cmd;
-      cin.ignore(32767, '\n');
-      cout << "Enter the names of characters:\n";
+      while (!_kbhit()) {}
+      char cmd = _getch();
+      cout << "\nEnter the names of characters:\n";
       string character;
       getline(cin, character);
       if (cmd == 'A' || cmd == 'a') {
@@ -106,9 +104,12 @@ void VoiceActress::Modify() {
       }
       break;
     }
+    case ESC:
+      cout << "\nModification was cancelled.\n\n";
+      return;
     default:
-      cerr << "Illegal command!\n";
+      cerr << "\nIllegal command!\n\n";
       return;
   }
-  cout << "Succeeded!\n" << *this << '\n';
+  cout << "\nSucceeded!\n" << *this << '\n';
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "person.h"
-#include <fstream>
 
 class VoiceActress : public Person {
  private:
@@ -26,7 +25,7 @@ class VoiceActress : public Person {
 template <typename StreamType>
 StreamType& operator>>(StreamType& in, VoiceActress& voice_actress) {
   string name;
-  cout << "Getting name...\n";
+  cout << "\nGetting name...\n";
   getline(in, name);
   voice_actress.SetName(name);
   Date date;
@@ -46,7 +45,7 @@ StreamType& operator>>(StreamType& in, VoiceActress& voice_actress) {
 // throws an exception if an internal error occurred.
 template <typename StreamType>
 StreamType& operator<<(StreamType& out, const VoiceActress& voice_actress) {
-  out << voice_actress.GetName() << '\n' <<
+  out << "\n" << voice_actress.GetName() << '\n' <<
          voice_actress.GetBirthday() << '\n' <<
          voice_actress.moe_rate_ << '\n' <<
          voice_actress.enterprise_ << '\n' <<

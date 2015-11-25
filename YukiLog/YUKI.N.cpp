@@ -10,7 +10,7 @@ namespace YUKI_N {
 bool Welcome() {
   cout << "YUKI.N:\n...\n" <<
           "Welcome to Nagato Yuki's log.\n" <<
-          "Here logs some important persons monitored by Çéˆó½yºÏË¼ÄîÌå.\n" <<
+          "Here logs some important persons monitored by æƒ…å ±çµ±åˆæ€å¿µä½“.\n" <<
           "Unadmitted visitors will be prevented from contact with the " <<
           "universe by force.\n" <<
           "Press Enter to continue " <<
@@ -23,7 +23,7 @@ bool Welcome() {
     this_thread::sleep_for(std::chrono::milliseconds(1000));
     cout << "...\n";
     this_thread::sleep_for(std::chrono::milliseconds(2000));
-    cout << "¤¢¤ê¤¬¤È¤¦¡£\n";
+    cout << "ã‚ã‚ŠãŒã¨ã†ã€‚\n";
     this_thread::sleep_for(std::chrono::milliseconds(2000));
     return false;
   }
@@ -45,9 +45,9 @@ void MainUI() {
   cout << "\nYou've exited the log program.\n";
   cout << "\nYUKI.N:\n";
   this_thread::sleep_for(std::chrono::milliseconds(1000));
-  cout << "¥­¥ç¥ó\n";
+  cout << "ã‚­ãƒ§ãƒ³\n";
   this_thread::sleep_for(std::chrono::milliseconds(2000));
-  cout << "¤Þ¤¿¤Í...\n";
+  cout << "ã¾ãŸã­...\n";
   this_thread::sleep_for(std::chrono::milliseconds(2000));
 }
 

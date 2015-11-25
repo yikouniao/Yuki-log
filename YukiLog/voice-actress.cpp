@@ -10,18 +10,18 @@ VoiceActress::VoiceActress(const Person& person, const double& moe_rate,
     : Person(person), moe_rate_(moe_rate), enterprise_(enterprise), characers_(characters) {}
 
 bool operator==(const VoiceActress& voice_actress1, const VoiceActress& voice_actress2) {
-  if (voice_actress1.GetName() == voice_actress2.GetName()) {
+  if (voice_actress1.GetName() == voice_actress2.GetName()) {  // names equal
     if (voice_actress1.GetBirthday() == voice_actress2.GetBirthday() &&
         voice_actress1.moe_rate_ == voice_actress2.moe_rate_ &&
         voice_actress1.enterprise_ == voice_actress2.enterprise_ &&
-        voice_actress1.characers_ == voice_actress2.characers_) {
+        voice_actress1.characers_ == voice_actress2.characers_) {  // other infos equal
       return true;
-    } else {
+    } else {  // other infos unequal
       cout << "Find two " << voice_actress1.GetName() <<
               " but they have different infomations.\n";
       return false;
     }
-  } else {
+  } else {  // names unequal
     return false;
   }
 }
@@ -97,7 +97,7 @@ void VoiceActress::Modify() {
       string character;
       getline(cin, character);
       if (cmd == 'A' || cmd == 'a') {
-        characers_ += "¡¢";
+        characers_ += ", ";
         characers_ += character;
       } else {
         characers_ = character;
@@ -110,6 +110,6 @@ void VoiceActress::Modify() {
     default:
       cerr << "\nIllegal command!\n\n";
       return;
-  }
+  }  // switch (cmd)
   cout << "\nSucceeded!\n" << *this << '\n';
 }

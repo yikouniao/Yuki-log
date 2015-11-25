@@ -10,17 +10,17 @@ Character::Character(const Person& person, const double& moe_rate,
     : Person(person), moe_rate_(moe_rate), anime_(anime) {}
 
 bool operator==(const Character& character1, const Character& character2) {
-  if (character1.GetName() == character2.GetName()) {
+  if (character1.GetName() == character2.GetName()) {  // names equal
     if (character1.GetBirthday() == character2.GetBirthday() &&
         character1.moe_rate_ == character2.moe_rate_ &&
-        character1.anime_ == character2.anime_) {
+        character1.anime_ == character2.anime_) {  // other infos equal
       return true;
-    } else {
+    } else {  // other infos unequal
       cout << "Find two " << character1.GetName() <<
               " but they have different infomations.\n";
       return false;
     }
-  } else {
+  } else {  // names unequal
     return false;
   }
 }
@@ -90,6 +90,6 @@ void Character::Modify() {
     default:
       cerr << "Illegal command!\n\n";
       return;
-  }
+  }  // switch(cmd)
   cout << "Succeeded!\n" << *this << '\n';
 }

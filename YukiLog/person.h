@@ -65,7 +65,7 @@ void CreatPersonList(list<PersonType>& person_list, const string& file) {
     cin.get();
     exit(1);
   }
-
+  cout << "Initializing person list...\n";
   PersonType new_person;
   while (person_file.peek() != EOF) {
     try {
@@ -165,6 +165,7 @@ bool FindPerson(const list<PersonType>& person_list,
       return true;
     }
   }
+  it = person_list.begin();
   return false;
 }
 
@@ -206,9 +207,15 @@ void AddPersonToList(list<PersonType>& person_list, StreamType& in) {
 template <typename PersonType>
 void DeletePerson(list<PersonType>& person_list,
                   typename list<PersonType>::iterator& it) {
-  string name = it->GetName();
-  person_list.erase(it);
-  cout << name << " was deleted!\n\n";
+  try {
+    string name = it->GetName();
+    person_list.erase(it);
+    cout << name << " was deleted!\n\n";
+    it = person_list.begin();
+  }
+  catch (...) {
+    cerr << "Error while deleting person.\n\n";
+  }
 }
 
 template <typename PersonType>

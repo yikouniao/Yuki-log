@@ -46,9 +46,9 @@ bool operator==(const Date& date1, const Date& date2) {
 }
 
 void Date::DateCheck() const {
-  if (year_ == 0 || month_ < 1 || month_ > 12) {
+  if (year_ == 0 || month_ < 1 || month_ > 12) {  // year or month wrong
     throw "Wrong Date!\n";
-  }	else {
+  }	else {  // year or month right
     switch (month_) {
     case 1:
     case 3:
@@ -56,7 +56,7 @@ void Date::DateCheck() const {
     case 7:
     case 8:
     case 10:
-    case 12: 
+    case 12:  // 31 days in these months
       if (day_ < 1 || day_ > 31) {
         throw "Wrong Date!\n";
       } else {
@@ -65,14 +65,14 @@ void Date::DateCheck() const {
     case 4:
     case 6:
     case 9:
-    case 11:
+    case 11:  // 30 days in these months
       if (day_ < 1 || day_ > 30) {
         throw "Wrong Date!\n";
       } else {
         return;
       }
-    case 2:
-      if (IsLeapYear()) {
+    case 2:  // in February
+      if (IsLeapYear()) {  // in a leap year
         if (day_ < 1 || day_ > 29) {
           throw "Wrong Date!\n";
         } else {
@@ -86,8 +86,8 @@ void Date::DateCheck() const {
         }
       }
     default: throw "Wrong Date!\n";
-    }
-  }
+    }  // switch (month_)
+  }  // year or month right
 }
 
 bool Date::IsLeapYear() const {

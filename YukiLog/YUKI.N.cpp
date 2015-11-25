@@ -2,6 +2,8 @@
 #include "person.h"
 #include "character.h"
 #include "voice-actress.h"
+#include <chrono>
+#include <thread>
 
 namespace YUKI_N {
 
@@ -17,6 +19,12 @@ bool Welcome() {
   if (_getch() == ENTER) {
     return true;
   } else {
+    cout << "\nYUKI.N:\n";
+    this_thread::sleep_for(std::chrono::milliseconds(1000));
+    cout << "...\n";
+    this_thread::sleep_for(std::chrono::milliseconds(2000));
+    cout << "ありがとう。\n";
+    this_thread::sleep_for(std::chrono::milliseconds(2000));
     return false;
   }
 }
@@ -31,9 +39,16 @@ void MainUI() {
     } else if (person_kind == VOICE_ACTRESS) {
       PersonUI(voice_actress_list, "dat/voice-actress.dat");
     } else {
-      return;
+      break;
     }
   }
+  cout << "\nYou've exited the log program.\n";
+  cout << "\nYUKI.N:\n";
+  this_thread::sleep_for(std::chrono::milliseconds(1000));
+  cout << "キョン\n";
+  this_thread::sleep_for(std::chrono::milliseconds(2000));
+  cout << "またね...\n";
+  this_thread::sleep_for(std::chrono::milliseconds(2000));
 }
 
 int SelectPersonType() {

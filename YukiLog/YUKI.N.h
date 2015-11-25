@@ -79,8 +79,8 @@ void YUKI_N::PersonUI(list<PersonType>& person_list, const string& file) {
         return;
       default:
         break;
-    }  // end switch (cmd)
-  }  // end while(1)
+    }  // switch (cmd)
+  }  // while(1)
 }
 
 template <typename PersonType>
@@ -100,12 +100,14 @@ void PersonUIU(list<PersonType>& person_list) {
   } else {
     UniquePersonList(person_list);
   }
+  cout << "sorting and deleting duplicate nodes were finished.\n";
 }
 
 template <typename PersonType>
 void PersonUIF(list<PersonType>& person_list, typename list<PersonType>::iterator& it) {
   cout << "Press \'N\' or \'n\' to find by name.\n" <<
-          "Press \'O\' or \'o\' to find by order.\n";
+          "Press \'O\' or \'o\' to find by order.\n" <<
+          "Press Esc to exit back.\n";
   while (1) {
     while (!_kbhit()) {}
     char cmd = _getch();
@@ -120,6 +122,7 @@ void PersonUIF(list<PersonType>& person_list, typename list<PersonType>::iterato
       } else {
         cout << name << " was not found!:\n" << "\n";
       }
+      break;
     } else if (cmd == 'O' || cmd == 'o') {  // find by order
       cout << "Enter the order:\n";
       cin >> order;
@@ -128,8 +131,13 @@ void PersonUIF(list<PersonType>& person_list, typename list<PersonType>::iterato
       } else {
         cout << "\nNumber " << order << " person was not found!:\n" << "\n";
       }
+      break;
+    } else if (cmd == ESC){  // exit back
+      break;
+    } else {
+      cerr << "Error command!\n";
     }
-  }
+  }  // while (1)
 }
 
 template <typename PersonType>
@@ -157,39 +165,46 @@ void PersonUIA(list<PersonType>& person_list) {
 
 template <typename PersonType>
 void PersonUID(list<PersonType>& person_list, typename list<PersonType>::iterator& it) {
-  string name = it->GetName();
-  int order { 0 };
-  cout << "Any other keys for deleting " << name << ",\n" <<
-          "or you can press \'N\' or \'n\' to delete a person by name,\n" <<
-          "or \'O\' or \'o\' to delete by order.\n";
-  while (!_kbhit()) {}
-  char cmd = _getch();
-  cout << "\n";
-  if (cmd == 'N' || cmd == 'n') {  // delete by name
-    cout << "Enter the name:\n";
-    getline(cin, name);
-    DeletePerson(person_list, name);
-  } else if (cmd == 'O' || cmd == 'o') {  // delete by order
-    cout << "Enter the order:\n";
-    cin >> order;
-    DeletePerson(person_list, order);
-  } else {  // delete what the iterator is pointing to currently
-    DeletePerson(person_list, it);
-  }
+  while (1) {
+    cout << "Current person is " << it->GetName() << ".\n" <<
+            "If you're going to delete another person, " <<
+            "press \'F\' or \'f\' to find him/her.\n" <<
+            "press Esc to exit back.\n" <<
+            "Press any other keys to continue.\n";
+    while (!_kbhit()) {}
+    char cmd = _getch();
+    cout << "\n";
+    if (cmd == 'F' || cmd == 'f') {
+      PersonUIF(person_list, it);
+    } else if (cmd == ESC) {
+      break;
+    } else {
+      DeletePerson(person_list, it);
+      break;
+    }
+  }  // while (1)
 }
 
 template <typename PersonType>
 void PersonUIM(list<PersonType>& person_list, typename list<PersonType>::iterator& it) {
-  cout << "Current person is " << it->GetName() << ".\n" <<
-          "If you're going to modify another person, " <<
-          "press Esc and use \'F\' or \'f\' to find him/her.\n" <<
-          "Press any other keys to continue.\n";
-  while (!_kbhit()) {}
-  char cmd = _getch();
-  cout << "\n";
-  if (cmd == ESC)
-    return;
-  it->Modify();
+  while (1) {
+    cout << "Current person is " << it->GetName() << ".\n" <<
+            "If you're going to modify another person, " <<
+            "press \'F\' or \'f\' to find him/her.\n" <<
+            "press Esc to exit back.\n" <<
+            "Press any other keys to continue.\n";
+    while (!_kbhit()) {}
+    char cmd = _getch();
+    cout << "\n";
+    if (cmd == 'F' || cmd == 'f') {
+      PersonUIF(person_list, it);
+    } else if (cmd == ESC) {
+      break;
+    } else {
+      it->Modify();
+      break;
+    }
+  }  // while (1)
 }
 
 template <typename PersonType>

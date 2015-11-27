@@ -150,8 +150,9 @@ void UniquePersonList(list<PersonType>& person_list, SortDir dir) {
 template <typename PersonType>
 bool FindPerson(const list<PersonType>& person_list, const string& name) {
   for (const auto& element : person_list) {
-    if (element.GetName() == name)
+    if (element.GetName() == name) {
       return true;
+    }
   }
   return false;
 }
@@ -198,10 +199,10 @@ void AddPersonToList(list<PersonType>& person_list, StreamType& in) {
   }
   if (FindPerson(person_list, new_person.GetName())) {
     cerr << '\n' << new_person.GetName() << " has already existed!\n";
-    return;
+  } else {
+    person_list.push_back(new_person);
+    cout << '\n' << new_person.GetName() << " has added successfully!\n";
   }
-  person_list.push_back(new_person);
-  cout << '\n' << new_person.GetName() << " has added successfully!\n";
 }
 
 template <typename PersonType>
@@ -236,12 +237,10 @@ void DeletePerson(list<PersonType>& person_list, int order) {
   list<PersonType>::iterator it = person_list.begin();
   if (static_cast<int>(person_list.size()) < order) {
     cout << "We have only " << person_list.size() << " persons.\n\n";
-  }
-  else if (order < 1) {
+  } else if (order < 1) {
     cout << "Input an interger order.\n" <<
       "You can print the whole list to check the order.\n\n";
-  }
-  else {
+  } else {
     int i = order;
     for (it = person_list.begin(); i > 1; ++it, --i) {}
     person_list.erase(it);

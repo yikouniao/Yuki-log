@@ -34,9 +34,11 @@ StreamType& operator>>(StreamType& in, Date& date) {
   getline(in, date_str);
   int date_length = date_str.length();
   int dot1 = 0, dot2 = 0;  // the position of two dots in ****.**.**
-  for (int i = 0; i < date_length; i++)
-    if (date_str[i] == '.')
+  for (int i = 0; i < date_length; i++) {
+    if (date_str[i] == '.') {
       (dot1 == 0) ? (dot1 = i) : (dot2 = i);
+    } else {}
+  }
   string date_year, date_month, date_day;
   date_year.assign(date_str, 0, dot1);
   date_month.assign(date_str, dot1 + 1, dot2 - dot1 - 1);
@@ -44,9 +46,10 @@ StreamType& operator>>(StreamType& in, Date& date) {
   date.year_ = stoi(date_year);
   date.month_ = stoi(date_month);
   date.day_ = stoi(date_day);
-  if (date_year.find("BC") != string::npos || date_year.find("bc") != string::npos)
+  if (date_year.find("BC") != string::npos ||
+      date_year.find("bc") != string::npos) {
     date.year_ = -date.year_;
-
+  }
   date.DateCheck();
   return in;
 }

@@ -1,13 +1,24 @@
-*.bak
+# exclude every other things
+*
 
-Debug/
-Release/
+# include .gitignore itself
+!/*.gitignore
 
-.vs/
+# include README.md
+!/README.md
 
-*.sln
-*.sdf
-*.opensdf
+# include /Yuki-log
+!/Yuki-log
 
-*.vcxproj
-*.filters
+# include source files
+!/Yuki-log/*.cpp
+!/Yuki-log/*.c
+!/Yuki-log/*.h
+!/Yuki-log/*.hpp
+
+# include /Yuki-log/dat
+!/Yuki-log/dat
+
+# include files that store data for the program
+!/Yuki-log/dat/*.txt
+!/Yuki-log/dat/*.dat

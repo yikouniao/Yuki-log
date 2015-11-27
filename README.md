@@ -1,8 +1,8 @@
 ﻿简介
 ====
 这是一个用来练习C++的项目。  
-设定大概是Yuki用来记录Character和VoiceActress两种Person（类），可以修改、增删文件内容的东西。
-方便起见，文件用.txt。文件存放在dat文件夹。文件中按一定格式存储Person们的信息。
+设定大概是Yuki用来记录Character和VoiceActress两种Person（类），可以修改、增删文件内容的东西。  
+文件按一定格式以文本形式把Person们的信息存为*.dat，文件存放在dat文件夹中。
 
 下一步
 ------

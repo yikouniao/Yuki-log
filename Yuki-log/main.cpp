@@ -6,8 +6,8 @@ int main()
   using namespace std;
   using namespace YUKI_N;
 
-  if (!Welcome())
-    return 0;
-  MainUI();
+  if (Welcome()) {
+    MainUI();
+  } else {}
   return 0;
 }

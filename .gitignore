@@ -7,18 +7,14 @@
 # include README.md
 !/README.md
 
-# include /Yuki-log
-!/Yuki-log
-
 # include source files
-!/Yuki-log/*.cpp
-!/Yuki-log/*.c
-!/Yuki-log/*.h
-!/Yuki-log/*.hpp
+!/*.cpp
+!/*.c
+!/*.h
+!/*.hpp
 
-# include /Yuki-log/dat
-!/Yuki-log/dat
+# include /dat
+!/dat
 
 # include files that store data for the program
-!/Yuki-log/dat/*.txt
-!/Yuki-log/dat/*.dat
+!/dat/*.dat
